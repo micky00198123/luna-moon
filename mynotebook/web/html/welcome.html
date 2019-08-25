@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>welcome</title>
+
+<style type="text/css">
+
+	body{
+		margin: 0;
+		padding: 0;
+		background: #487eb0;
+	}
+
+	.welcome {
+		width: 300px;
+		padding: 15px;
+		text-align: center;
+		background: #191970;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		overflow: hidden;
+		border-radius: 12px;
+		z-index: 1;
+	}
+	
+	#wel {
+		margin: 20px;
+		font-family: 'MLP Gameloft';
+		color: #fff;
+		font-size: 48px;
+	}
+	
+</style>
+
+<!-- 泡泡背景 -->
+<link rel="stylesheet" href="../css/Bubble.css">
+
+<script type="text/javascript">
+
+	window.onload = function(){
+	
+		var request = new XMLHttpRequest();
+		var resText = request.responseText;
+		var test = document.getElementById("test");
+		if(resText == "")
+			test.innerHTML = "aaa";
+		
+	};
+	
+
+</script>
+
+</head>
+<body>
+
+	<div class="welcome">
+	
+		<h1 id="wel">Welcome!</h1>
+		<p id="test"></p>
+	
+	</div>
+
+	<!-- 泡泡背景 -->
+	<div class="wrap">
+		<div class="bubble b1"></div>
+		<div class="bubble b2"></div>
+		<div class="bubble b3"></div>
+		<div class="bubble b4"></div>
+		<div class="bubble b5"></div>
+		<div class="bubble b6"></div>
+		<div class="bubble b7"></div>
+		<div class="bubble b8"></div>
+		<div class="bubble b9"></div>
+		<div class="bubble b10"></div>
+		<div class="bubble b11"></div>
+		<div class="bubble b12"></div>
+		<div class="bubble b13"></div>
+		<div class="bubble b14"></div>
+		<div class="bubble b15"></div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<c3p0-config>
+
+<!-- c3p0配置文件要放在src文件夹下 -->
+
+  <named-config name="myNoteBook">
+  
+  	<!-- 连接数据源的基本属性 -->
+  	<property name="user">root</property>
+  	<property name="password">ad9908</property>
+  	<property name="driverClass">com.mysql.jdbc.Driver</property>
+  	<property name="jdbcUrl">jdbc:mysql:///noteBook</property>
+
+	<!-- 若数据库中连接数不足时，一次向服务器申请多少个连接 -->
+    <property name="acquireIncrement">5</property>
+    <!-- 初始化数据库连接池时产生连接的数量 -->
+    <property name="initialPoolSize">10</property>
+    <!-- 最小数据库连接数量 -->
+    <property name="minPoolSize">10</property>
+    <!-- 最大数据库连接数量 -->
+    <property name="maxPoolSize">50</property>
+
+	<!-- 连接池可维护的Statement个数 -->
+    <property name="maxStatements">20</property> 
+    <!-- 每个连接可使用的Statement对象的个数 -->
+    <property name="maxStatementsPerConnection">5</property>
+    
+  </named-config>
+  
+</c3p0-config>

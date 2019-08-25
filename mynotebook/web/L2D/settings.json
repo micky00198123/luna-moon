@@ -1,0 +1,8 @@
+{
+    "type": "Live2D Model Setting", 
+    "name": "Pony", 
+    "model": "3Dpony/assets/Pony.moc", 
+    "textures": [
+        "3Dpony/assets/pony/2.png"
+    ]
+}

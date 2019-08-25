@@ -1,0 +1,46 @@
+
+
+window.onload = function(){
+
+            if(${user != null}){
+                document.getElementById("test").innerHTML="欢迎: ${user.userName}";
+            } else {
+                document.getElementById("test").innerHTML="请先登录！";
+            }
+
+        };
+        使用正常，但
+
+        window.onload = function(){
+
+            var user = ${user}; // 先用变量获取
+            if(user != null){
+                document.getElementById("test").innerHTML="欢迎: ${user.userName}";
+            } else {
+                document.getElementById("test").innerHTML="请先登录！";
+            }
+
+        };
+        会使window.onload中所有代码失效
+
+        问题出在var user = ${user};上，但为何使周围整片代码失效，原因不明
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
