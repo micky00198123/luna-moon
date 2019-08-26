@@ -92,8 +92,8 @@
             margin-right: -6px;
         }
 
-        .checkAccount{
-            color: crimson;
+        #checkAccount{
+            color: red;
             font-size: 12px;
         }
 
@@ -169,8 +169,7 @@
             </p>
 
             <p class="tip">【欢迎光临一个还没做完的登录界面~~】</p>
-            <p class="checkAccount" id="checkAccount">${message }</p>
-            <% session.removeAttribute("message"); %>
+            <p id="checkAccount"></p>
 
             <input type="submit" value="登录" id="login"
                    class="sub" onsubmit="return check()">

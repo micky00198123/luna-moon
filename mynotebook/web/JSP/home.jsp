@@ -18,10 +18,15 @@
                 if(confirm("是否登出?")){
                     var xmlhttp = new XMLHttpRequest();
                     var url = "${pageContext.request.contextPath }/JSP/logout";
+                    url += "?case=logout";
                     xmlhttp.open("GET",url,true);
                     xmlhttp.send();
-                    alert("注销成功!");
-                    location.reload();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                            alert("注销成功!");
+                            location.reload();
+                        }
+                    };
                 }
             };
 

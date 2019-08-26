@@ -15,10 +15,6 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public boolean registerAccount(LoginData ld) {
-        // 如果重名
-        if(ud.checkDuplicateNames(ld.getUserName())) {
-            return false;
-        }
 
         Connection conn = null;
         User user = new User();

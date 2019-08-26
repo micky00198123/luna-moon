@@ -92,8 +92,8 @@
             margin-right: -6px;
         }
 
-        .checkAccount{
-            color: crimson;
+        #checkAccount{
+            color: red;
             font-size: 12px;
         }
 
@@ -132,24 +132,18 @@
             var regButton = document.getElementById("register");
             regButton.onclick = function check(){
                 //通过id获取标签对象
-                var uName = document.getElementById("username");
                 var pw1 = document.getElementById("password");
                 var pw2 = document.getElementById("password2");
 
-                var rightUserName = /^[a-zA-Z0-9_]{4,16}$/;//用户名正则
                 var rightPassword = /^[a-zA-Z0-9]{6,16}$/;//密码正则
 
                 //获取input内容用value
-                if(!rightUserName.test(uName.value)){//这里使用test方法检查两个字符串
-                    alert("用户名不合法！");
-                    return false;
-                }
                 if(!rightPassword.test(pw1.value)){
-                    alert("密码不合法！");
+                    document.getElementById("checkAccount").innerHTML="密码不合法！";
                     return false;
                 }
                 if(pw1.value != pw2.value){
-                    alert("两次密码输入不一致！");
+                    document.getElementById("checkAccount").innerHTML="两次密码输入不一致！";
                     return false;
                 }
                 return true;
@@ -157,23 +151,35 @@
 
         };
 
-        /*
-        $(function(){
-            $('#username').on('input propertychange', function() {
-                var val = $(this).val();
-                val = $.trim(val);
-                $("#aaa").html(val);
-                if(val != ""){
-                    var url = "${pageContext.request.contextPath }/RegisterServlet";
-                    var args = {"username":val};
+        // 实时检查名字是否可用
+        function checkName(){
 
-                    $.get(url,args,function(data){
-                       $("#message").html(data);
-                    });
+            // 检查用户名是否合规范
+            var rightUserName = /^[a-zA-Z0-9_]{4,16}$/;
+            var name = document.getElementById("username").value;
+            if(!rightUserName.test(name)){
+                document.getElementById("checkAccount").innerHTML="用户名不合法！";
+                return;
+            }
+
+            // 检查用户名是否重名
+            var xmlhttp = new XMLHttpRequest();
+
+            // 直接将用户名附在url之后,使用get请求访问服务器
+            var url = "${pageContext.request.contextPath }/JSP/userRegister";
+            url += "?username=" + name;
+            xmlhttp.open("GET",url,true);
+            xmlhttp.send();
+
+            // 待状态码改变,请求响应完成,且处于"OK"状态时
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                    document.getElementById("checkAccount").innerHTML
+                        = xmlhttp.responseText;
                 }
-            });
-        });
-        */
+            };
+
+        }
 
     </script>
 </head>
@@ -186,7 +192,7 @@
         <form action="userRegister" method="post">
 
             <p>
-                <input type="text" name="username"
+                <input type="text" name="username" oninput="checkName()"
                        placeholder="请输入用户名" id="username" class="txtb">
             </p>
             <p>
@@ -201,8 +207,7 @@
             <p class="tip">【用户名长度在4~16字符之间，由字母、数字、下划线组成】</p>
             <p class="tip">【密码长度在6~16字符之间，由字母、数字组成】</p>
 
-            <p class="checkAccount">${message }</p>
-            <% session.removeAttribute("message"); %>
+            <p id="checkAccount"></p>
 
             <input type="submit" value="提交注册" id="register"
                    class="sub" onsubmit="return check()">

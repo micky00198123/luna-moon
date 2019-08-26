@@ -18,6 +18,10 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+		// 防止乱码
+		resp.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html;charset=utf-8");
+
 		HttpSession session = req.getSession();
 		String userName = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -30,11 +34,14 @@ public class LoginServlet extends HttpServlet {
 		User user = loginServiceImpl.checkAccount(loginData);
 
 		if(user == null) {
-			session.setAttribute("message", "用户名或密码错误");
-			resp.sendRedirect(req.getContextPath() + "/JSP/login.jsp");
+			resp.getWriter().write("<script>alert('用户名或密码错误');" +
+					"window.location.href='" + req.getContextPath() +
+					"/JSP/login.jsp' </script>");
 		} else {
 		    session.setAttribute("user", user);
-		    resp.sendRedirect(req.getContextPath() + "/JSP/home.jsp");
+			resp.getWriter().write("<script>alert('欢迎登陆');" +
+					"window.location.href='" + req.getContextPath() +
+					"/JSP/home.jsp' </script>");
 		}
 
 
