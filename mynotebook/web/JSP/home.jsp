@@ -13,11 +13,27 @@
     <script>
         window.onload = function(){
 
+            var logout = document.getElementById("logout");
+            logout.onclick = function logoutAccount(){
+                if(confirm("是否登出?")){
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "${pageContext.request.contextPath }/JSP/logout";
+                    xmlhttp.open("GET",url,true);
+                    xmlhttp.send();
+                    alert("注销成功!");
+                    location.reload();
+                }
+            };
+
             if(${user != null}){
-                document.getElementById("test").innerHTML="欢迎: ${user.userName}";
-                document.getElementById("name").innerHTML="${user.userName}";
-                document.getElementById("sex").innerHTML="${user.sex}";
-                document.getElementById("age").innerHTML="${user.age}";
+                document.getElementById("href").style.display="none";
+                document.getElementById("user").style.display="inline";
+                document.getElementById("information").style.display="inline";
+
+                document.getElementById("welcome").innerHTML="欢迎: ${user.userName}";
+                document.getElementById("name").innerHTML="昵称:${user.userName}";
+                document.getElementById("sex").innerHTML="性别:${user.sex}";
+                document.getElementById("age").innerHTML="年龄:${user.age}";
             }
 
         };
@@ -26,12 +42,21 @@
 </head>
 <body>
 
-    <div>
-        <p id="test"></p>
+    <div id="href">
+        <a id="login" href="login.jsp">登录</a>
+        <a id="register" href="register.jsp">注册</a>
+    </div>
+
+    <div id="user" style="display: none">
+        <p id="welcome"></p>
+        <button id="logout" type="button">注销</button>
+    </div>
+
+    <div id="information" style="display: none">
         <h1>个人信息</h1>
-        昵称:<p id="name">请先登录！</p>
-        性别:<p id="sex">请先登录！</p>
-        年龄:<p id="age">请先登录！</p>
+        <p id="name"></p>
+        <p id="sex"></p>
+        <p id="age"></p>
     </div>
 
 </body>
