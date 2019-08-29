@@ -39,9 +39,8 @@ public class LoginServlet extends HttpServlet {
 					"/JSP/login.jsp' </script>");
 		} else {
 		    session.setAttribute("user", user);
-			resp.getWriter().write("<script>alert('»¶Ó­µÇÂ½');" +
-					"window.location.href='" + req.getContextPath() +
-					"/JSP/home.jsp' </script>");
+			resp.getWriter().write("<script>window.location.href='" +
+					req.getContextPath() + "/JSP/home.jsp' </script>");
 		}
 
 

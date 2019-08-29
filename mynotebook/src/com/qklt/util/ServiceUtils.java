@@ -1,6 +1,7 @@
 package com.qklt.util;
 
 import java.security.MessageDigest;
+import java.util.Random;
 
 public class ServiceUtils {
 
@@ -44,6 +45,18 @@ public class ServiceUtils {
         }
 
         return new String(resultCharArray);
+    }
+
+    // Éú³ÉËæ»ú×Ö·û´®
+    public static String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
 
 

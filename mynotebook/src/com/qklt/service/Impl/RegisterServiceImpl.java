@@ -28,8 +28,8 @@ public class RegisterServiceImpl implements RegisterService {
             conn.setAutoCommit(false);
 
             // 两个数据表必须同时写入,防止意外中断产生脏数据
-            ud.updateUserToAccount(conn, ld);
-            ud.updateUserToInformation(conn, user);
+            ud.insertUserToAccount(conn, ld);
+            ud.insertUserToInformation(conn, user);
 
             // 事务提交
             conn.commit();

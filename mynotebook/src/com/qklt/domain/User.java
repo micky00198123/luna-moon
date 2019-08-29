@@ -5,6 +5,15 @@ public class User {
     private String userName;
     private String sex;
     private String age;
+    private String portrait;
+
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
+    }
 
     public String getSex() {
         return sex;

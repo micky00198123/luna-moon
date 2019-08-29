@@ -78,16 +78,16 @@ public class UserDAOImpl extends DAOImpl<User> {
      * @param ld
      * @return
      */
-	public boolean updateUserToAccount(Connection conn, LoginData ld) throws SQLException {
+	public boolean insertUserToAccount(Connection conn, LoginData ld) throws SQLException {
         String sql = "INSERT INTO users_account(userName, password) "
                 + "VALUES (?,?)";
         return super.save(conn, sql, ld.getUserName(), ld.getPassword());
 	}
 
-    public boolean updateUserToAccount(LoginData ld){
+    public boolean insertUserToAccount(LoginData ld){
 		connection = C3P0Utils.getConnection();
 		try {
-			return this.updateUserToAccount(connection, ld);
+			return this.insertUserToAccount(connection, ld);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -101,16 +101,37 @@ public class UserDAOImpl extends DAOImpl<User> {
      * @param user 只插入userName,其他字段使用默认设置
      * @return
      */
-	public boolean updateUserToInformation(Connection conn, User user) throws SQLException {
+	public boolean insertUserToInformation(Connection conn, User user) throws SQLException {
         String sql = "INSERT INTO users_information(userName) "
                 + "VALUES (?)";
         return super.save(conn, sql, user.getUserName());
 	}
 
-    public boolean updateUserToInformation(User user){
+    public boolean insertUserToInformation(User user){
 		connection = C3P0Utils.getConnection();
 		try {
-			return this.updateUserToInformation(connection, user);
+			return this.insertUserToInformation(connection, user);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			C3P0Utils.releaseConnection(connection);
+		}
+	}
+
+	/**
+	 * 向用户信息数据库修改记录
+	 * @param user
+	 * @return
+	 */
+	public boolean updateUserInformation(User user) {
+		connection = C3P0Utils.getConnection();
+		String sql = "UPDATE users_information " +
+				"SET sex = ?, age = ?, portrait = ?" +
+				"WHERE userName = ?";
+		try {
+			return save(connection, sql, user.getSex(),
+					user.getAge(), user.getPortrait(), user.getUserName());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

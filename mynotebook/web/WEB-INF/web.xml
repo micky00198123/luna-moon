@@ -26,12 +26,20 @@
 	<!-- 注销映射 -->
 	<!-- 连接home.jsp的logout(get请求)与HomeServlet的doGet方法 -->
 	<servlet>
-		<servlet-name>Logout</servlet-name>
+		<servlet-name>Home</servlet-name>
 		<servlet-class>com.qklt.controller.HomeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Logout</servlet-name>
-		<url-pattern>/JSP/logout</url-pattern>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/JSP/logout.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/JSP/setting.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/JSP/uploadImg.do</url-pattern>
 	</servlet-mapping>
  	
 </web-app>
